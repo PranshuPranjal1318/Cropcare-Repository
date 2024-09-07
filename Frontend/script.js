@@ -1,15 +1,15 @@
 // Function to clear the page content
 function clearPage() {
-  document.getElementById("cityName").textContent = "";
-  document.getElementById("errorContainer").innerHTML = "";
-  document.getElementById("irrigationPattern").textContent = " ";
-  document.getElementById("oneDayTableContainer").innerHTML = "";
+  document.getElementById("cityName").textContent = ""; // Clear city name
+  document.getElementById("errorContainer").innerHTML = ""; // Clear error messages
+  document.getElementById("irrigationPattern").textContent = " "; // Clear irrigation pattern
+  document.getElementById("oneDayTableContainer").innerHTML = ""; // Clear weather table
 }
 
 // Function to handle form submission
 function submitForm(event) {
   if (event) {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault(); // Prevent default form submission behavior
   }
 
   // Clear the page
@@ -32,10 +32,10 @@ function submitForm(event) {
     .then((response) => {
       // Handle response from server (weather data)
       const weatherData = response.data;
-      const irrigationPattern = analyzeForecast(weatherData);
-      displayIrrigationPattern(irrigationPattern);
-      displayWeatherData(weatherData, latitude, longitude);
-      createWeatherChart(weatherData); // Add weather chart visualization
+      const irrigationPattern = analyzeForecast(weatherData); // Analyze forecast data
+      displayIrrigationPattern(irrigationPattern); // Display irrigation recommendation
+      displayWeatherData(weatherData, latitude, longitude); // Display weather data
+      createWeatherChart(weatherData); // Create weather chart visualization
     })
     .catch((error) => {
       console.error("Error fetching weather data:", error);
@@ -59,18 +59,18 @@ function displayWeatherData(weatherData, latitude, longitude) {
     )
     .then((response) => {
       const city = response.data.locality;
-      cityName.textContent = `Forecast for ${city}`;
+      cityName.textContent = `Forecast for ${city}`; // Set city name
     })
     .catch((error) => {
       console.error("Error fetching city name:", error);
       displayError("Error fetching city name. Please try again later.");
     });
 
-  const table = createWeatherTable(weatherData);
+  const table = createWeatherTable(weatherData); // Create weather table
   const scrollableContainer = document.createElement("div");
   scrollableContainer.classList.add("table-responsive", "scrollable-table");
   scrollableContainer.appendChild(table);
-  oneDayTableContainer.appendChild(scrollableContainer);
+  oneDayTableContainer.appendChild(scrollableContainer); // Add table to container
 }
 
 // Function to display irrigation pattern suggestion
@@ -89,6 +89,7 @@ function createWeatherTable(weatherData) {
   const table = document.createElement("table");
   table.classList.add("table");
 
+  // Create table header
   const tableHeader = document.createElement("thead");
   tableHeader.innerHTML = `
         <tr>
@@ -192,6 +193,7 @@ function analyzeForecast(weatherData) {
         soilMoisture.every((value) => value < 70),
     },
   ];
+  // Find the first matching irrigation pattern
   const suggestedPattern = irrigationPatterns.find((pattern) =>
     pattern.condition()
   );
@@ -206,7 +208,7 @@ function analyzeForecast(weatherData) {
 function createWeatherChart(weatherData) {
   const existingChart = Chart.getChart("weatherChart");
   if (existingChart) {
-    existingChart.destroy();
+    existingChart.destroy(); // Destroy existing chart if any
   }
   const ctx = document.getElementById("weatherChart").getContext("2d");
   const timeLabels = weatherData.hourly.time.map((time) =>
@@ -216,6 +218,7 @@ function createWeatherChart(weatherData) {
   const humidityData = weatherData.hourly.relative_humidity_2m;
   const precipitationData = weatherData.hourly.precipitation_probability;
 
+  // Create new chart
   const weatherChart = new Chart(ctx, {
     type: "line",
     data: {
@@ -284,8 +287,8 @@ function getLocation() {
       (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        document.getElementById("latitude").value = latitude;
-        document.getElementById("longitude").value = longitude;
+        document.getElementById("latitude").value = latitude; // Set latitude input
+        document.getElementById("longitude").value = longitude; // Set longitude input
       },
       (error) => {
         console.error("Error getting location:", error);
@@ -303,7 +306,7 @@ function getLocation() {
 // Add event listeners
 document
   .getElementById("getLocationBtn")
-  .addEventListener("click", getLocation);
+  .addEventListener("click", getLocation); // Listen for location button click
 document
   .getElementById("farmDetailsForm")
-  .addEventListener("submit", submitForm);
+  .addEventListener("submit", submitForm); // Listen for form submission

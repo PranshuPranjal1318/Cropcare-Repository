@@ -1,74 +1,112 @@
 <!DOCTYPE html>
+<!-- Declares that this is an HTML5 document -->
 <html lang="en">
+<!-- Opens the HTML tag and sets the language to English -->
+
 <head>
+    <!-- Opens the head section of the HTML document -->
     <meta charset="UTF-8">
+    <!-- Specifies the character encoding for the HTML document -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Sets the viewport for responsive design -->
     <title>CropCare</title>
+    <!-- Sets the title of the webpage -->
     <!-- Link Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Links to the Bootstrap CSS file for styling -->
     <!-- Link Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Links to a custom CSS file for additional styling -->
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Includes the Chart.js library for creating charts -->
 </head>
+<!-- Closes the head section -->
+
 <body>
+    <!-- Opens the body section of the HTML document -->
 
-<div class="container mt-5">
-    <h1 class="mb-4">CropCare - Helper</h1>
-    
-    <!-- Farm Details Form -->
-    <form id="farmDetailsForm">
-        <div class="form-group">
-            <label for="latitude">Latitude</label>
-            <input type="text" class="form-control" id="latitude" placeholder="Enter latitude">
+    <div class="container mt-5">
+        <!-- Creates a container div with top margin -->
+        <h1 class="mb-4">CropCare - Helper</h1>
+        <!-- Adds a heading with bottom margin -->
+
+        <!-- Farm Details Form -->
+        <form id="farmDetailsForm">
+            <!-- Creates a form for farm details -->
+            <div class="form-group">
+                <!-- Creates a form group for latitude input -->
+                <label for="latitude">Latitude</label>
+                <!-- Adds a label for the latitude input -->
+                <input type="text" class="form-control" id="latitude" placeholder="Enter latitude">
+                <!-- Creates an input field for latitude -->
+            </div>
+            <div class="form-group">
+                <!-- Creates a form group for longitude input -->
+                <label for="longitude">Longitude</label>
+                <!-- Adds a label for the longitude input -->
+                <input type="text" class="form-control" id="longitude" placeholder="Enter longitude">
+                <!-- Creates an input field for longitude -->
+            </div>
+            <div class="form-group">
+                <!-- Creates a form group for crop type selection -->
+                <label for="cropType">Crop Type</label>
+                <!-- Adds a label for the crop type dropdown -->
+                <select class="form-control" id="cropType">
+                    <!-- Creates a dropdown menu for crop types -->
+                    <option value="Wheat">Wheat</option>
+                    <option value="Rice">Rice</option>
+                    <option value="Corn">Corn</option>
+                    <option value="Soybean">Soybean</option>
+                    <option value="Barley">Barley</option>
+                    <option value="Cotton">Cotton</option>
+                    <option value="Sugarcane">Sugarcane</option>
+                    <option value="Potato">Potato</option>
+                    <option value="Tomato">Tomato</option>
+                    <option value="Apple">Apple</option>
+                    <!-- Adds options for different crop types -->
+                </select>
+            </div>
+            <button id="getLocationBtn" type="button" class="btn btn-primary">Get Location</button>
+            <!-- Adds a button to get the current location -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- Adds a submit button for the form -->
+        </form>
+
+        <!-- City Name Display -->
+        <h2 id="cityName" class="mt-4"></h2>
+        <!-- Creates a heading to display the city name -->
+
+        <!-- Irrigation Pattern Display -->
+        <div id="irrigationPattern" class="mt-4"></div>
+        <!-- Creates a div to display irrigation patterns -->
+
+        <!-- Error Container -->
+        <div id="errorContainer" class="mt-4"></div>
+        <!-- Creates a div to display error messages -->
+
+        <!-- Visualization Container -->
+        <div id="visualizationContainer" class="mt-4">
+            <!-- Creates a container for visualizations -->
+            <canvas id="weatherChart" width="400" height="200"></canvas>
+            <!-- Adds a canvas element for the weather chart -->
         </div>
-        <div class="form-group">
-            <label for="longitude">Longitude</label>
-            <input type="text" class="form-control" id="longitude" placeholder="Enter longitude">
-        </div>
-        <div class="form-group">
-            <label for="cropType">Crop Type</label>
-            <select class="form-control" id="cropType">
-                <option value="Wheat">Wheat</option>
-                <option value="Rice">Rice</option>
-                <option value="Corn">Corn</option>
-                <option value="Soybean">Soybean</option>
-                <option value="Barley">Barley</option>
-                <option value="Cotton">Cotton</option>
-                <option value="Sugarcane">Sugarcane</option>
-                <option value="Potato">Potato</option>
-                <option value="Tomato">Tomato</option>
-                <option value="Apple">Apple</option>
-            </select>
-        </div>
-        <button id="getLocationBtn" type="button" class="btn btn-primary">Get Location</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 
-    <!-- City Name Display -->
-    <h2 id="cityName" class="mt-4"></h2>
-
-    <!-- Irrigation Pattern Display -->
-    <div id="irrigationPattern" class="mt-4"></div>
-
-    <!-- Error Container -->
-    <div id="errorContainer" class="mt-4"></div>
-
-    <!-- Visualization Container -->
-    <div id="visualizationContainer" class="mt-4">
-        <canvas id="weatherChart" width="400" height="200"></canvas>
+        <!-- Forecast Table Container -->
+        <div id="oneDayTableContainer" class="table-responsive mt-4"></div>
+        <!-- Creates a responsive container for the forecast table -->
     </div>
 
-    <!-- Forecast Table Container -->
-    <div id="oneDayTableContainer" class="table-responsive mt-4"></div>
-</div>
+    <!-- Include Axios library -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Includes the Axios library for making HTTP requests -->
 
-<!-- Include Axios library -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-<!-- Include custom JavaScript -->
-<script src="script.js"></script>
-
+    <!-- Include custom JavaScript -->
+    <script src="script.js"></script>
+    <!-- Links to a custom JavaScript file -->
 
 </body>
+<!-- Closes the body section -->
+
 </html>
+<!-- Closes the HTML tag -->
